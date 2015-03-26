@@ -7,28 +7,30 @@
     <link href="StyleSheet.css" rel="stylesheet" type="text/css" />
 
     <script type="text/javascript">
-    
+    var otherAwards = [];
+
+
     $(document).ready(function()
       {
-	
-	
-	
-        
         $.ajax({
-		type: "GET",
-		url: "myData.xml",
-		dataType: "xml",
-		success: function(xml) {
-                    
-                $('body').append('<h1>Top Journalists</h1>');
-                $('body').append('<dl />');
+        		type: "GET",
+        		url: "myData.xml",
+        		dataType: "xml",
+        		success: parseXML});
+
+        function parseXML(xml) {
+
+            $('body').append('<h1>Top Journalists</h1>');
+            $('body').append('<dl />');
 
         $(xml).find('person').each(function(){
             //console.log("once for every person");
-            var $person = $(this); 
+            var $person = $(this);
             var name = $person.attr("name");
             var description = $person.find('description').text();
             var imageurl = $person.attr('imageurl');
+            otherAwards.push(parseInt($person.find('other-awards').text()));
+
 
             var html = '<dt> <img class="bioImage" alt="" src="' + imageurl + '" /> </dt>';
             html += '<dd> <span class="loadingPic" alt="Loading" />';
@@ -37,13 +39,17 @@
             html += '</dd>';
 
             $('dl').append($(html));
-            
+
             $('.loadingPic').fadeOut(1400);
+
+
         });
+        console.log(otherAwards);
+        buildChart();
                 }
-    });
-	
-	
+
+
+function buildChart(){
 	var chart1 = new Highcharts.Chart({
         chart: {
             renderTo: 'chart',
@@ -61,16 +67,16 @@
             }
         },
         series: [{
-            name: 'Putlizers',
+            name: 'Pulitzers',
             data: [1, 0, 4]
         }, {
             name: 'Other',
-            data: [15, 36, 19]
+            data: otherAwards
         }]
     });
-	
-	
-	
+}
+
+
 });
     </script>
 

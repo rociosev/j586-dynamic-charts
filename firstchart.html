@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <meta charset="UTF-8">
+<title>First Chart</title>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+<script src="sand-theme.js"></script>
+
+<script>
+$(function () {
+    $('#bar-chart').highcharts({
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'jomc 586 Grades'
+        },
+        xAxis: {
+            categories: ['Project 1', 'Project 2', 'Project 3']
+        },
+        yAxis: {
+            title: {
+                text: 'Grade'
+            }
+        },
+        labels:{
+          items: [{
+            html:"this is my label",
+            style:{
+              left:'900px',
+              bottom:'0px'
+              }
+          }]
+        },
+        series: [{
+            name: 'Lila',
+            data: [89, 90, 78]
+        }, {
+            name: 'Karen',
+            data: [100, 50, 82]
+        }]
+    });
+});
+
+
+$(function () {
+
+        $('#pie-chart').highcharts({
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false
+            },
+            title: {
+                text: 'Browser market shares at a specific website, 2014'
+            },
+            tooltip: {
+                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: false
+                    },
+                    showInLegend: true
+                }
+            },
+            series: [{
+                type: 'pie',
+                name: 'Browser share',
+                data: [
+                    ['Firefox',   45.0],
+                    ['IE',       26.8],
+                    {
+                        name: 'Chrome',
+                        y: 12.8,
+                        sliced: true,
+                        selected: true
+                    },
+                    ['Safari',    8.5],
+                    ['Opera',     6.2],
+                    ['Others',   0.7]
+                ]
+            }]
+        });
+    });
+
+
+
+
+</script>
+
+
+</head>
+
+<body>
+
+<div id="bar-chart" style="width:100%; height:400px;"></div>
+<div id="pie-chart" style="width:50%; height:400px;"></div>
+
+
+
+
+
+</body>
+
+</html>
